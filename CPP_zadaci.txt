@@ -1,0 +1,159 @@
+1. Zadatak: Ucitat n pa n brojeva ispisat najmanji, najveci
+
+#include <iostream>
+
+int main()
+{
+    int n;
+    int i;
+    int broj;
+    int min;
+    int max;
+    broj = 0;
+    min = 1000;
+    max = 0;
+    std::cin >> n ;
+    for (i=1; i<=n; ++i)
+    {
+        std::cin >> broj;
+        if (broj<min)
+        {
+        min = broj;
+        }
+        if (broj>max)
+        {
+        max = broj;
+        }
+    }
+    std::cout << "Min: " << min << std::endl << "Max: " << max << std::endl;
+    return 0;
+    
+}
+
+2. Zadatak: ucitat string ispisat znakove od kraja prema pocetku
+
+Ispis znakova:
+
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::string s;
+    std::cin >> s;
+    std::string::reverse_iterator it;
+    for (it = s.rbegin(); it != s.rend(); ++it)
+    {
+        std::cout << *it << std::endl;
+    }
+
+return 0;
+
+}
+
+Ispis stringa naopako:
+
+#include <iostream>
+#include <algorithm>
+
+int main()
+{
+    std::string s;
+    std::cin >> s;
+    std::reverse(s.begin(), s.end());
+    std::cout << s << std::endl;
+
+return 0;
+}
+
+
+3. Zadatak: ucitat n pa n brojeva, ispisat najvecu sumu 2 uzastopna
+
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    std::vector<int> vecint;
+    int n, i, br, prev, sum, max_sum;
+    sum = 0;
+    prev = -1;
+    max_sum = -1;
+    std::cin >> n;
+    std::vector<int>::const_iterator it;
+    for (i=0; i<n; ++i)
+    {
+        std::cin >> br;
+        vecint.push_back(br);
+    }
+    
+    std::cout << "Numbers are: " << std::endl;
+    for (it=vecint.begin(); it != vecint.end(); ++it)
+    {
+        std::cout << *it << " ";
+        if (prev > -1)
+        {
+            sum = prev + *it;
+            if (sum > max_sum)
+            {
+                max_sum = sum;
+            }
+        }
+        prev = *it;
+        
+    }
+    
+    std::cout << std::endl << "Max sum is: " << max_sum << std::endl;
+   
+   return 0;
+}
+
+
+
+4. Zadatak: ucitat n pa n brojeva, ispisat duzinu najveceg uzlaznog uzastopnog podniza
+
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    int d, i, num, prev, rez, max_rez;
+    std::vector<int> vectint;
+    std::vector<int>::const_iterator it;
+    std::cout << "Unesi duljinu niza: " << std::endl;
+    std::cin >> d;
+    for (i=0; i<d; ++i)
+    {
+        std::cin >> num;
+        vectint.push_back(num);
+    }
+    
+    prev = -1;
+    rez = 1;
+    max_rez = -1;
+    
+    for (it=vectint.begin(); it != vectint.end(); ++it)
+    {
+        if (prev > -1)
+        {
+            if (*it-prev == 1)
+            {
+                rez = rez + 1; 
+            }
+            else
+            {
+            	rez = 1;
+            }
+            if (rez > max_rez)
+            {
+            max_rez = rez;
+            }
+            
+        }
+       prev = *it;
+    }
+    
+    std::cout << "Duljina najduzeg uzastopnog niza je: " << max_rez << std::endl;
+   
+   return 0;
+}
