@@ -163,6 +163,16 @@ int main()
 #include <vector>
 #include <algorithm>
 
+void print(std::vector<int> vectint)
+{
+    std::vector<int>::const_iterator it;
+    for (it=vectint.begin(); it != vectint.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
 int main()
 {
     int d, i, num, prev, rez, max_rez;
@@ -176,20 +186,9 @@ int main()
         std::cin >> num;
         vectint.push_back(num);
     }
-    
-    for (it=vectint.begin(); it != vectint.end(); ++it)
-    {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-    
+    print(vectint);
     std::sort(vectint.begin(), vectint.end());
-    
-    for (it=vectint.begin(); it != vectint.end(); ++it)
-    {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
+    print(vectint);
     
     prev = -1;
     rez = 1;
@@ -219,6 +218,7 @@ int main()
     
    return 0;
 }
+
 
 
 
