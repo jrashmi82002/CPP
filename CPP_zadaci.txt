@@ -157,3 +157,69 @@ int main()
    
    return 0;
 }
+5. Zadatak: ucitat n pa n brojeva, ispisat duzinu najveceg uzlaznog podniza a da nije uzastopni.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+    int d, i, num, prev, rez, max_rez;
+    std::vector<int> vectint;
+    std::vector<int>::const_iterator it;
+    std::cout << "Unesi duljinu niza:d" << std::endl;
+    std::cin >> d;
+    std::cout << "Unesi d brojeva:" << std::endl;
+    for (i=0; i<d; ++i)
+    {
+        std::cin >> num;
+        vectint.push_back(num);
+    }
+    
+    for (it=vectint.begin(); it != vectint.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+    
+    std::sort(vectint.begin(), vectint.end());
+    
+    for (it=vectint.begin(); it != vectint.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+    
+    prev = -1;
+    rez = 1;
+    max_rez = -1;
+    
+    for (it=vectint.begin(); it != vectint.end(); ++it)
+    {
+        if (prev > -1)
+        {
+            if (*it - prev == 1)
+            {
+                rez = rez + 1;
+            }
+            else
+            {
+                rez = 1;
+            }
+            if (rez > max_rez)
+            {
+                max_rez = rez;
+            }
+        }
+        prev = *it;
+    }
+    
+    std::cout << "Duljina najduzeg uzlaznog niza koji nije uzastopni je: " << max_rez << std::endl;
+    
+   return 0;
+}
+
+
+
+
