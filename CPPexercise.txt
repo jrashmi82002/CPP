@@ -9,6 +9,7 @@ The class should be named Stack, and should contain:
 
 
 #include <iostream>
+#include <casert>
 
 //A private fixed array of integers of length 10.
 //A private integer to keep track of the length of the stack.
@@ -64,19 +65,13 @@ class Stack {
     //If there are no values on the stack, it should assert out.
 
     int pop()
-    {
-        if (m_next > 0)
-        {
-            int poped = m_array[m_next];
-            m_array[m_next] = 0;
-            m_next -= 1;
-            return poped;
-        }
-        else
-        {
-            return 1;
-        }
-    }
+   {
+       assert (m_next > 0);
+       int poped = m_array[m_next];
+       m_array[m_next] = 0;
+       m_next -= 1;
+       return poped;
+   }
 
 };
 
