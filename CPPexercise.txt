@@ -1,0 +1,113 @@
+#include <iostream>
+
+class Point3d {
+  
+  double m_x;
+  double m_y;
+  double m_z;
+  
+  //A public member function named setValues() that allows you to set values for m_x, m_y, and m_z
+  
+  public:
+  
+  void setValues(double value1, double value2, double value3)
+  {
+      m_x = value1;
+      m_y = value2;
+      m_z = value3;
+  }
+  
+  //A public member function named print() that prints the Point in the following format: <m_x, m_y, m_z>
+  
+  void print()
+  {
+      std::cout << "<" << m_x << ", " << m_y << ", " << m_z << ">" << std::endl;
+  }
+  
+    
+};
+
+
+int main()
+{
+    Point3d point;
+    point.setValues(1.0, 2.0, 3.0);
+ 
+    point.print();
+ 
+    return 0;
+}
+################################################################################
+
+
+#include <iostream>
+
+//A private fixed array of integers of length 10.
+//A private integer to keep track of the length of the stack.
+
+class Stack {
+    
+    int m_array[10];
+    int m_next;
+    
+    public:
+    // A public member function named reset() that sets the length to 0 and all of the element values to 0.
+    
+    void reset()
+    {
+        m_next = 0;
+        for(int i=0; i<10; ++i)
+        {
+            m_array[i] = 0;
+        }
+    }
+    
+    // A public member function named push() that pushes a value on the stack. 
+    //push() should return false if the array is already full
+
+    bool push(int value)
+    {
+        if (m_next < 9)
+        {
+            m_array[m_next] = value;
+            m_next += 1;
+            return true;
+        }
+        else
+        {
+            return false;      
+        }
+
+    }
+
+    //* A public member function named print() that prints all the values in the stack.
+    
+    void print()
+    {  
+        std::cout << "(";
+        for(int i = 0; i < m_next; ++i)
+        {
+            std::cout << " " << m_array[i] << " ";
+        }
+        std::cout << ")" <<std::endl;
+    }
+
+};
+
+int main()
+{
+    Stack stack;
+	stack.reset();
+ 
+	stack.print();
+ 
+	stack.push(5);
+	
+	stack.push(3);
+	
+	stack.push(8);
+	
+	stack.print();
+  
+  return 0;  
+};
