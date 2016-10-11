@@ -1,43 +1,11 @@
-#include <iostream>
-
-class Point3d {
-  
-  double m_x;
-  double m_y;
-  double m_z;
-  
-  //A public member function named setValues() that allows you to set values for m_x, m_y, and m_z
-  
-  public:
-  
-  void setValues(double value1, double value2, double value3)
-  {
-      m_x = value1;
-      m_y = value2;
-      m_z = value3;
-  }
-  
-  //A public member function named print() that prints the Point in the following format: <m_x, m_y, m_z>
-  
-  void print()
-  {
-      std::cout << "<" << m_x << ", " << m_y << ", " << m_z << ">" << std::endl;
-  }
-  
-    
-};
-
-
-int main()
-{
-    Point3d point;
-    point.setValues(1.0, 2.0, 3.0);
- 
-    point.print();
- 
-    return 0;
-}
-################################################################################
+/*Write a class that implements a simple stack from scratch.
+The class should be named Stack, and should contain:
+* A private fixed array of integers of length 10.
+* A private integer to keep track of the length of the stack.
+* A public member function named reset() that sets the length to 0 and all of the element values to 0.
+* A public member function named push() that pushes a value on the stack. push() should return false if the array is already full, and true otherwise.
+* A public member function named pop() that pops a value off the stack and returns it. If there are no values on the stack, it should assert out.
+* A public member function named print() that prints all the values in the stack.*/
 
 
 #include <iostream>
@@ -46,13 +14,13 @@ int main()
 //A private integer to keep track of the length of the stack.
 
 class Stack {
-    
+
     int m_array[10];
     int m_next;
-    
+
     public:
     // A public member function named reset() that sets the length to 0 and all of the element values to 0.
-    
+
     void reset()
     {
         m_next = 0;
@@ -61,8 +29,8 @@ class Stack {
             m_array[i] = 0;
         }
     }
-    
-    // A public member function named push() that pushes a value on the stack. 
+
+    // A public member function named push() that pushes a value on the stack.
     //push() should return false if the array is already full
 
     bool push(int value)
@@ -75,15 +43,15 @@ class Stack {
         }
         else
         {
-            return false;      
+            return false;
         }
 
     }
 
     //* A public member function named print() that prints all the values in the stack.
-    
+
     void print()
-    {  
+    {
         std::cout << "(";
         for(int i = 0; i < m_next; ++i)
         {
@@ -92,22 +60,45 @@ class Stack {
         std::cout << ")" <<std::endl;
     }
 
+    //* A public member function named pop() that pops a value off the stack and returns it.
+    //If there are no values on the stack, it should assert out.
+
+    int pop()
+    {
+        if (m_next > 0)
+        {
+            int poped = m_array[m_next];
+            m_array[m_next] = 0;
+            m_next -= 1;
+            return poped;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
 };
 
 int main()
 {
-    Stack stack;
+	Stack stack;
 	stack.reset();
- 
+
 	stack.print();
- 
+
 	stack.push(5);
-	
 	stack.push(3);
-	
 	stack.push(8);
-	
 	stack.print();
-  
-  return 0;  
-};
+
+	stack.pop();
+	stack.print();
+
+	stack.pop();
+	stack.pop();
+
+	stack.print();
+
+	return 0;
+}
