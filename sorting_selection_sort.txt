@@ -1,0 +1,36 @@
+/*Write a C++ program (using function overloaded) to sort 10 integer values, or 10 long values, or 10 double
+values.*/
+
+#include <iostream>
+#include <algorithm>
+
+
+void sort(int array[10])
+{
+    for(int startindex = 0; startindex < 10; ++startindex)
+    {
+        int lowest = startindex;
+
+        for(int currentindex = startindex + 1; currentindex < 10; ++currentindex)
+        {
+            if (array[currentindex] < array[lowest])
+            {
+                lowest = currentindex;
+            }
+        }
+
+        std::swap(array[startindex],array[lowest]);
+    }
+}
+
+int main()
+{
+    int array[10] = {89, 90, 45, 32, 21, 2, 76, 56, 78, 10};
+    sort(array);
+
+    for (int element : array)
+    std::cout << element << " ";
+
+
+    return 0;
+}
