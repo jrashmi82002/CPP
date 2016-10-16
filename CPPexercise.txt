@@ -1,99 +1,203 @@
-/*Write a class that implements a simple stack from scratch.
-The class should be named Stack, and should contain:
-* A private fixed array of integers of length 10.
-* A private integer to keep track of the length of the stack.
-* A public member function named reset() that sets the length to 0 and all of the element values to 0.
-* A public member function named push() that pushes a value on the stack. push() should return false if the array is already full, and true otherwise.
-* A public member function named pop() that pops a value off the stack and returns it. If there are no values on the stack, it should assert out.
-* A public member function named print() that prints all the values in the stack.*/
-
+/*Write a function which will be given as input an array, its size and an integer p. The function will
+then cyclically shift the array p positions to the right: each element is moved p positions to the right,
+while the last p elements are moved to the beginning of the array. For example: if we have the array
+[ 1 2 3 4 5 6], shifting 2 positions to the right should give the array [ 5 6 1 2 3 4 ].*/
 
 #include <iostream>
-#include <casert>
+#include <algorithm>
 
-//A private fixed array of integers of length 10.
-//A private integer to keep track of the length of the stack.
+int *cyclic(int array[], int length, int p)
+{
 
-class Stack {
+    int *newarray = new int[10];
+    //int newarray[length];
+    int newindex;
 
-    int m_array[10];
-    int m_next;
+    //int newarray[];
+    //int* newarray;
 
-    public:
-    // A public member function named reset() that sets the length to 0 and all of the element values to 0.
+    //int newarray[length];
+    //int* newarray;
+    //newarray = malloc(sizeof(int), length);
 
-    void reset()
+    for(int index = 0; index < length; ++index)
     {
-        m_next = 0;
-        for(int i=0; i<10; ++i)
-        {
-            m_array[i] = 0;
-        }
-    }
 
-    // A public member function named push() that pushes a value on the stack.
-    //push() should return false if the array is already full
-
-    bool push(int value)
-    {
-        if (m_next < 9)
+        if (index + p <= length - 1)
         {
-            m_array[m_next] = value;
-            m_next += 1;
-            return true;
+            newindex = index + p;
         }
         else
         {
-            return false;
+            newindex = index - length + p;
         }
+
+        newarray[newindex] = array[index];
 
     }
 
-    //* A public member function named print() that prints all the values in the stack.
+    return newarray;
+};
 
-    void print()
+int main()
+{
+    int testarray[] = {11,12,13,14,15,16,17,18,19,20};
+    int *x;
+    x = cyclic(testarray, 10, 4);
+
+    for (int i=0; i<10; ++i)
     {
-        std::cout << "(";
-        for(int i = 0; i < m_next; ++i)
-        {
-            std::cout << " " << m_array[i] << " ";
-        }
-        std::cout << ")" <<std::endl;
+        std::cout << x[i] << " ";
     }
+    std::cout << std::endl;
+    delete[] x;
+    return 0;
+}
 
-    //* A public member function named pop() that pops a value off the stack and returns it.
-    //If there are no values on the stack, it should assert out.
 
-    int pop()
-   {
-       assert (m_next > 0);
-       int poped = m_array[m_next];
-       m_array[m_next] = 0;
-       m_next -= 1;
-       return poped;
-   }
+#############################################################################################
+#############################################################################################
+/*Write a function that decides if a given char array is a palindrome. A palindrome is a word/phrase
+that can be read the same from left to right as from right to left. Example: EVE, MADAMIMADAM,
+ABBA are palindromes.*/
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+bool palindrome(std::string word)
+{
+    std::string orig_word = word;
+    std::reverse(word.begin(), word.end());
+
+    std::cout << word << std::endl;
+
+    if (word == orig_word) {return true;}
+    else {return false;}
+}
+
+int main()
+{
+    bool if_palindrome;
+    if_palindrome = palindrome("anavolimilovana");
+    std::cout << if_palindrome;
+
+
+   return 0;
+}
+####################################################################################################
+####################################################################################################
+/*Write a function which, given an array of integers, returns the integer that appears most frequently in
+the array. E.g. for the array [ 1 2 3 2 3 4 2 5 ] your function should return 2.*/
+
+#include <iostream>
+
+int max(int array[], int length)
+{
+    int count;
+    int maxcount = 0;
+    int freq = 0;
+
+    for(int i=0; i<length; ++i)
+    {
+        count = 0;
+
+        for(int j=0; j<length; ++j)
+        {
+            if (array[i] == array[j])
+            {
+                count += 1;
+
+                if (count > maxcount)
+                {
+                    maxcount = count;
+                    freq = array[i];
+                }
+            }
+        }
+    }
+    return freq;
 
 };
 
 int main()
 {
-	Stack stack;
-	stack.reset();
+    int list[] = {12, 3, 4, 5, 5, 7, 8, 5, 3, 9, 0};
+    int most_freq_number = max(list, 11);
 
-	stack.print();
-
-	stack.push(5);
-	stack.push(3);
-	stack.push(8);
-	stack.print();
-
-	stack.pop();
-	stack.print();
-
-	stack.pop();
-	stack.pop();
-
-	stack.print();
-
-	return 0;
+    std::cout << "Most freq number is: " << most_freq_number << std::endl;
+   return 0;
 }
+
+/*more accurate version of same exercise solved with std::map<>*/
+
+#include <iostream>
+#include <map>
+
+//print content of map
+  void print(std::map<int,int> mymap)
+  {
+    std::map<int,int>::iterator it;
+
+    for(it=mymap.begin(); it != mymap.end(); ++it)
+    {
+      std::cout << "key: " << it->first << " value: " << it->second << std::endl;
+    }
+  };
+
+//creating map of elements in array as keys and setting their values to number of occurences in array
+std::map<int,int> create_map(int array[], int length)
+{
+  std::map<int,int> counting_map;
+  std::map<int,int>::iterator it;
+
+  for (int i=0; i<length; ++i)
+  {
+      counting_map[array[i]] = 0;
+      int count = 0;
+
+      for (int j=0; j<length; ++j)
+      {
+          if (array[i] == array[j])
+          {
+              count += 1;
+          }
+      }
+      counting_map[array[i]] = count;
+  }
+  return counting_map;
+};
+
+int main()
+{
+  int ar[] = {2, 90, 90, 67, 2, 90, 4, 90, 6, 8, 2, 2};
+  std::map<int,int> somemap;
+  somemap = create_map(ar, 12);
+  print(somemap);
+
+  int max_value = 0;
+  int max_freq = 0;
+
+  for (std::map<int,int>::iterator it = somemap.begin(); it != somemap.end(); ++it)
+  {
+      if(it->second > max_value)
+      {
+          max_value = it->second;
+          //max_freq = it->first;
+      }
+  }
+  for (std::map<int,int>::iterator it = somemap.begin(); it != somemap.end(); ++it)
+  {
+      if (it->second == max_value)
+      {
+          max_freq = it->first;
+          std::cout << "Max number of occurence is: " << max_value
+          << " and number(s) that occured most frequently is: " << max_freq << std::endl;
+      }
+
+  }
+
+ return 0;
+
+}###################################################################################################
+###################################################################################################
