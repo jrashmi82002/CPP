@@ -201,3 +201,64 @@ int main()
 
 }###################################################################################################
 ###################################################################################################
+#include <iostream>
+
+class Date {
+
+    int m_day;
+    int m_month;
+    int m_year;
+
+public:
+
+    Date(int day = 0, int month = 0, int year = 0): m_day(day), m_month(month), m_year(year){}
+
+    int getDay(){return m_day;}
+    int getMonth(){return m_month;}
+    int getYear(){return m_year;}
+
+    void printDate()
+    {
+        std::cout << m_day << "/" << m_month << "/" << m_year << std::endl;
+    }
+
+};
+
+int main()
+{
+    Date today;
+    today.printDate();
+    Date tomorrow(23,10,2016);
+    tomorrow.printDate();
+    std::cout << tomorrow.getDay() << std::endl;
+    std::cout << tomorrow.getMonth() << std::endl;
+    std::cout << tomorrow.getYear() << std::endl;
+
+   return 0;
+}
+
+
+Date.h
+#################################
+#ifndef DATE_H
+#define DATE_H
+
+class Date {
+
+    int m_day;
+    int m_month;
+    int m_year;
+
+    Date(int day, int month, int year);
+
+    int getDay(){return m_day;}
+    int getMonth(){return m_month;}
+    int getYear(){return m_year;}
+
+    void printDate();
+};
+
+
+
+
+#endif
