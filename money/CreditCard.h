@@ -18,6 +18,10 @@ public:
   }
 
   void print();
+  //one charge method take as parameters a string (the item name) and a Money object
+  void chargeCard1(std::string item, Money cost);
+  //second charge method take a string and two integers (describing the price in euros, centimes)
+  void chargeCard2(std::string item, int euros, int centimes);
 
 };
 

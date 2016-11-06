@@ -15,10 +15,15 @@ int main()
     m3.print();*/
 
     Money m(100,20);
+    Money m1(18,45);
     //Money m1(5,1000);
     //(m+m+m).print();
     //(m-m1).print();
     CreditCard card("Marko", "12345", "jacket", m);
+    //card.print();
+    card.chargeCard1("shirt", m1);
+    //card.print();
+    card.chargeCard2("shooes", 85, 30);
     card.print();
     return 0;
 }

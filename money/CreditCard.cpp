@@ -6,6 +6,7 @@ card, and two charge methods which add new transactions to the card. One charge 
 as parameters a string (the item name) and a Money object. The other should take a string and two
 integers (describing the price in euros, centimes).*/
 #include <iostream>
+#include <string>
 #include "Money.h"
 #include "CreditCard.h"
 
@@ -19,4 +20,19 @@ void CreditCard::print()
       it->second.print();
       std::cout << std::endl;
     }
+  }
+
+  //one charge method take as parameters a string (the item name) and a Money object
+
+  void CreditCard::chargeCard1(std::string item, Money cost)
+  {
+    m_transactions.insert(std::pair<std::string, Money>(item, cost));
+  }
+
+  //second charge method take a string and two integers (describing the price in euros, centimes)
+
+  void CreditCard::chargeCard2(std::string item, int euros, int cents)
+  {
+    Money cost(euros, cents);
+    m_transactions.insert(std::pair<std::string, Money>(item, cost));
   }
